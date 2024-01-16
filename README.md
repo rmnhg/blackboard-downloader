@@ -1,55 +1,31 @@
 <p align="center">
-  <a href="https://chrome.google.com/webstore/detail/moodle-downloader/ohhocacnnfaiphiahofcnfakdcfldbnh">
   <img src="assets/icon512.png" width="128" height="128">
   </a>
-<h3 align="center">MoodleDownloader</h3>
-<p align="center">A chrome extension for batch downloading Moodle resources.</p>
+<h3 align="center">BlackboardDownloader</h3>
+<p align="center">A chrome extension for batch downloading Blackboard resources.</p>
 </p>
 <p align="center">
-  <a href="https://github.com/harsilspatel/MoodleDownloader/blob/master/LICENSE.md">
+  <a href="https://github.com/rmnhg/BlackboardDownloader/blob/master/LICENSE.md">
     <img alt="MIT license" src="https://img.shields.io/github/license/harsilspatel/moodleDownloader?color=brightgreen" />
   </a>
-  <a href="https://img.shields.io/chrome-web-store/rating/ohhocacnnfaiphiahofcnfakdcfldbnh.svg?color=ff69b4">
-    <img src="https://img.shields.io/chrome-web-store/rating/ohhocacnnfaiphiahofcnfakdcfldbnh.svg?color=ff69b4" alt="Chrome Web Store" />
-  </a>
-  <a href="https://img.shields.io/chrome-web-store/users/ohhocacnnfaiphiahofcnfakdcfldbnh?color=yellow">
-    <img src="https://img.shields.io/chrome-web-store/users/ohhocacnnfaiphiahofcnfakdcfldbnh?color=yellow" alt="Chrome Web Store" />
-  </a>
 </p>
+
+Cloned from [Moodle Downloader from harsilspatel](https://github.com/harsilspatel/moodle-downloader) and adapted for Blackboard.
 
 ## Installation 💻
 
-Install the latest version of MoodleDownloader from the [Chrome Web Store](https://chrome.google.com/webstore/detail/moodle-downloader/ohhocacnnfaiphiahofcnfakdcfldbnh).
-
-Alternatively, if you prefer installing it manually, the latest archive can be found [here](https://github.com/harsilspatel/MoodleDownloader/releases/latest).
+Clone this repo and load it from Chrome extensions after enabling developer mode.
 
 
 ## Why ⁉️
-There are dozens of apps/scripts for downloading moodle resources out there, however, none of them are operable by a non-IT student. For instance, an average art student doesn't know (or doesn't even care) how to execute terminal commands to get those moodle files, therefore I decided to create an average-user-friendly tool! Additionally, this is my exercise in both improving my javascript and better understand how google analytics and chrome apis work (mostly the latter!)
+There are dozens of apps/scripts for downloading Blackboard resources out there, however, none of them are operable by a non-IT student. For instance, an average art student doesn't know (or doesn't even care) how to execute terminal commands to get those moodle files, therefore I decided to create an average-user-friendly tool! Additionally, this is my exercise in both improving my javascript and better understand how google analytics and chrome apis work (mostly the latter!)
 
 ## Usage 🛠
-1. Login in to your moodle (for example https://moodle.vle.monash.edu)
-2. Open the week (section) from where you would like to download the resources from
+1. Login in to your Blackboard.
+2. Open the section from where you would like to download the resources from.
 3. Click on the extension icon and select the resources to be downloaded.
     - Click and drag or use ⌘ key to select multiple options:
 4. Hit the `Download` button to get the resources!
-
-## GIFs 🎞
-### Without MoodleDownloader 😩
-~38 seconds to download 10 files
-
-<img src="screencaptures/withoutMD.gif" width="60%">
-
-### With MoodleDownloader 🤩
-~11 seconds to download 21 files
-
-<img src="screencaptures/withMD.gif" width="60%">
-
-<br/>
-<br/>
-
-#### Motivation 💡
-Realised in the week 11 that I don't have most of the resources 😭
 
 <br/>
 

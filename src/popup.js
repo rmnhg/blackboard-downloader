@@ -4,30 +4,6 @@
  * https://github.com/harsilspatel/MoodleDownloader
  */
 function main() {
-    // google analytics
-    (function(i, s, o, g, r, a, m) {
-        i["GoogleAnalyticsObject"] = r;
-        (i[r] =
-            i[r] ||
-            function() {
-                (i[r].q = i[r].q || []).push(arguments);
-            }),
-            (i[r].l = 1 * new Date());
-        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m);
-    })(
-        window,
-        document,
-        "script",
-        "https://www.google-analytics.com/analytics.js",
-        "ga"
-    );
-
-    ga("create", "UA-119398707-1", "auto");
-    ga("set", "checkProtocolTask", null);
-    ga("send", "pageview");
 
     // downloadResources on button press
     const button = document.getElementById("downloadResources");
@@ -35,20 +11,14 @@ function main() {
         downloadResources();
     });
 
-    document.getElementById("shareLink").addEventListener("click", () => {
-        var copyFrom = document.createElement("textarea");
-        copyFrom.textContent =
-            "https://chrome.google.com/webstore/detail/geckodm/pgkfjobhhfckamidemkddfnnkknomobe";
-        document.body.appendChild(copyFrom);
-        copyFrom.select();
-        document.execCommand("copy");
-        copyFrom.blur();
-        document.body.removeChild(copyFrom);
+    const buttonIframe = document.getElementById("loadIframe");
+    buttonIframe.addEventListener("click", () => {
+        chrome.tabs.executeScript({ file: "./src/backgroundIframe.js" }, () => {});
     });
 
     document.getElementById("sourceCode").addEventListener("click", () => {
         chrome.tabs.create({
-            url: "https:github.com/harsilspatel/moodleDownloader"
+            url: "https://github.com/rmnhg/blackboard-downloader"
         });
     });
 
@@ -99,48 +69,6 @@ function initStorage() {
     });
 }
 
-function requestFeedback() {
-    chrome.storage.sync.get(["downloads", "alreadyRequested"], result => {
-        console.log("inside requestFeedback");
-        if (result.downloads >= 50 && result.alreadyRequested == false) {
-            console.log("attaching ");
-            const nah = document.getElementById("nah");
-            const sure = document.getElementById("sure");
-            const feedbackDiv = document.getElementById("feedbackDiv");
-            const feedbackPrompt = document.getElementById("feedbackPrompt");
-            feedbackDiv.removeAttribute("hidden");
-
-            nah.addEventListener("click", () => {
-                chrome.storage.sync.set({ alreadyRequested: true }, function() {
-                    console.log("alreadyRequested is set to " + true);
-                });
-                nah.setAttribute("hidden", "hidden");
-                sure.setAttribute("hidden", "hidden");
-                feedbackPrompt.innerHTML = "";
-                setTimeout(() => {
-                    feedbackDiv.setAttribute("hidden", "hidden");
-                }, 2000);
-            });
-
-            sure.addEventListener("click", () => {
-                chrome.storage.sync.set({ alreadyRequested: true }, function() {
-                    console.log("alreadyRequested is set to " + true);
-                });
-                nah.setAttribute("hidden", "hidden");
-                sure.setAttribute("hidden", "hidden");
-                feedbackPrompt.innerHTML = "You're a very considerate human! 💝";
-                setTimeout(() => {
-                    feedbackDiv.setAttribute("hidden", "hidden");
-                    chrome.tabs.create({
-                        url:
-                            "https://chrome.google.com/webstore/detail/moodle-downloader/ohhocacnnfaiphiahofcnfakdcfldbnh"
-                    });
-                }, 2000);
-            });
-        }
-    });
-}
-
 function filterOptions() {
     const searchField = document.getElementById("search");
     const query = searchField.value.toLowerCase();
@@ -188,20 +116,31 @@ function suggestFilename(downloadItem, suggest) {
         filename = sanitisedItemName + ".html";
     }
 
-    if (replaceFilename) {
+    if (replaceFilename && !item.inSectionFolder) {
         const lastDot = filename.lastIndexOf(".");
         const extension = lastDot === -1 ? "" : filename.slice(lastDot);
-        filename = sanitisedItemName + extension;
+        filename = sanitiseFilename(item.subSection) + extension;
     }
 
     if (organizeChecked) {
-        suggest({
-            filename:
-                sanitiseFilename(item.course) +
-                "/" +
-                (item.section && sanitiseFilename(item.section) + "/") +
-                filename
-        });
+		if (item.inSectionFolder) {
+			suggest({
+				filename:
+					sanitiseFilename(item.course) +
+					"/" +
+					(item.section && sanitiseFilename(item.section) + "/") +
+					sanitiseFilename(item.subSection) + "/" +
+					filename
+			});
+		} else {
+			suggest({
+				filename:
+					sanitiseFilename(item.course) +
+					"/" +
+					(item.section && sanitiseFilename(item.section) + "/") +
+					filename
+			});
+		}
     } else {
         suggest({ filename });
     }
@@ -234,11 +173,10 @@ function downloadResources() {
     // updating stats
     updateDownloads(selectedOptions.length);
 
-    // showing the button and removing the text and requesting for feedback
+    // showing the button
     setTimeout(() => {
         footer.removeChild(warning);
         button.removeAttribute("hidden");
-        requestFeedback();
     }, (selectedOptions.length + 4) * INTERVAL);
 
     selectedOptions.forEach((option, index) => {

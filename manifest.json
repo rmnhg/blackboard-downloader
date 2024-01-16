@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Moodle Downloader",
-  "description": "A chrome extension for downloading Moodle resources",
+  "name": "Blackboard Downloader",
+  "description": "A chrome extension for downloading Blackboard resources",
   "version": "1.5.3",
   "icons": {
     "16": "assets/icon16.png",
@@ -16,7 +16,6 @@
   "browser_action": {
     "default_popup": "src/popup.html"
   },
-  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
   "permissions": [
     "activeTab",
 		"downloads",

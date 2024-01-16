@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>moodleDownloader</title>
+        <title>BlackboardDownloader</title>
         <link rel="stylesheet"  type="text/css" href="../css/style.css">
         <link rel="stylesheet" href="../css/material.min.css">
         <script src="../css/material.min.js"></script>
@@ -12,7 +12,7 @@
 
       <div class="demo-card-wide mdl-card mdl-shadow--2dp">
         <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">moodleDownloader 📚</h2>
+          <h2 class="mdl-card__title-text">BlackboardDownloader 📚</h2>
         </div>
 
         <div class="mdl-card__actions mdl-card--border">
@@ -35,38 +35,25 @@
               </label>
               <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="replaceFilename">
                 <input type="checkbox" id="replaceFilename" class="mdl-checkbox__input">
-                <span style="font-size:75%;" class="mdl-checkbox__label">Replace filename with Moodle name</span>
+                <span style="font-size:75%;" class="mdl-checkbox__label">Replace filename with section name</span>
               </label>
 
               <label for="resourcesSection" >
                 <br>
                 <br>
-                <span style="font-size:75%;">Hint: Head to the Resouces to download all resources at once!</span>
+				Press the Load iframe button if you do not see any file to download being in the right page!
                 <br>
                 <br>
               </label>
 
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="downloadResources">Download</button>
-              <a href="">
-                <div id="shareLink" class="icon material-icons">share</div>
-              </a>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="loadIframe">Load iframe</button>
+
               <div style="display: inline;">
-                <a id="sourceCode" href="https://github.com/harsilspatel/moodleDownloader">
+                <a id="sourceCode" href="https://github.com/rmnhg/blackboard-downloader">
                   <img src="../assets/github120.png" alt="Souce code"  align="right" style="width: 9%; padding-right: 2%;">
                 </a>
               </div>
-            </div>
-
-            <div hidden='hidden' id=feedbackDiv>
-                <br>
-                <small id=feedbackPrompt>You just downloaded 50th file using this tool! 🎉 <br/> <br/> Consider rating this extension to help other students like yourself find it easily</small>
-                <br>
-                <button class="mdl-button mdl-js-button mdl-button--primary" id=nah>
-                  Nah! 😒
-                </button>
-                <button style='position:absolute; right: 5%;' class="mdl-button mdl-js-button mdl-button--accent" id=sure>
-                    Sure! 😎
-                </button>
             </div>
           </div>
         </div>
